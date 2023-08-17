@@ -1,17 +1,20 @@
-const fs = require("fs")
-const path = require("path")
+const images = [
+    "./images/1.webp",
+    "./images/2.webp",
+    "./images/3.webp",
+    "./images/4.webp",
+    "./images/5.webp",
+]
+const imageElement = document.getElementById("randomImage")
+const getRandomImage = () => images[Math.floor(Math.random() * images.length)]
+const initialSrc = getRandomImage()
 
-const imageFolder = "images"
+imageElement.src = initialSrc
+imageElement.alt = initialSrc
 
-fs.readdir(imageFolder, (err, files) => {
-    if (err) {
-        console.error("Помилка при отриманні списку файлів:", err)
-        return
-    }
+document.getElementById("loadImageButton").addEventListener("click", () => {
+    const src = getRandomImage()
 
-    const imageFiles = files.filter(file => path.extname(file).toLowerCase() === ".jpg")
-
-    const randomImage = imageFiles[Math.floor(Math.random() * imageFiles.length)]
-
-    console.log("Випадкове зображення:", randomImage)
+    imageElement.src = src
+    imageElement.alt = src
 })
